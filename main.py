@@ -1,5 +1,6 @@
-from PIL import Image, ImageDraw, ImageFont
-
+from tkinter import *
+from tkinter import ttk
+from PIL import Image, ImageDraw, ImageFont, ImageTk
 def resizer_func(img, hor, ver):
     raw_img=Image.open(img)
     resized_img=raw_img.resize((hor,ver))
@@ -14,12 +15,31 @@ def watermarker_func(img, text, text_x, text_y):# Kullanıcı isterse renklendir
     copied_img.save(f"watermarked_{img}")
 
 
-img_url=input("Enter the image name:\n")
+# img_url=input("Enter the image name:\n")
 # hor=int(input("Enter the horizontal size of the image:\n"))
 # ver=int(input("Enter the vertical size of the image:\n"))
 # resizer_func(img_url, hor, ver)
 
-watermark_text=input("Enter anything:\n")
-text_x=int(input("Enter the X-Position what you want:\n"))
-text_y=int(input("Enter the Y-Position what you want:\n"))
-watermarker_func(img_url, watermark_text,text_x , text_y)
+# watermark_text=input("Enter anything:\n")
+# text_x=int(input("Enter the X-Position what you want:\n"))
+# text_y=int(input("Enter the Y-Position what you want:\n"))
+# watermarker_func(img_url, watermark_text,text_x , text_y)
+root=Tk()
+root.geometry("1200x700")
+frame=ttk.Frame(root, padding=50)
+frame.grid()
+image=Image.open("resized_metro.jpg")
+photo=ImageTk.PhotoImage(image)
+label=Label(root, image=photo)
+label.grid(column=0, row=0, columnspan=10)
+def save_func():
+    label2=Label(root, text="Button Clicked!\n")
+    label2.grid(column=11,row=0)
+def add_func():
+    label3=Label(root, text="Button Clicked!\n")
+    label3.grid(column=12, row=0)
+save_button=Button(root, text="Save Settings", command=save_func)
+save_button.grid(row=1, column=4, pady=10, padx=5)
+add_button=Button(root, text="Add File", command=add_func)
+add_button.grid(row=1, column=5)
+root.mainloop()
